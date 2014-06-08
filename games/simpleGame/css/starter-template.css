@@ -1,0 +1,19 @@
+body {
+    padding-top: 50px;
+}
+
+#score {
+    color: #fff;
+    background-color: #080808;
+    padding: 10px 15px;
+    font-size: 1.5em;
+}
+
+.starter-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+
+#countDown {
+    float: right;
+}
