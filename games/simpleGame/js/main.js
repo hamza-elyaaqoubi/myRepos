@@ -23,7 +23,7 @@ require(['underscore', 'jQuery'],
 
         var score = 0;
         $(document).keydown(function (event) {
-            var keyCode = String.fromCharCode(event.which);
+            var keyCode = String.fromCharCode(event.which).toLowerCase();
 
             if (keyCode === " " ) {
                 return false;
@@ -38,19 +38,23 @@ require(['underscore', 'jQuery'],
 
         });
 
-        var timerStart = 50;
+        var timerStart = 5;
         startTimer = function () {
             setTimeout(startTimer, 1000);
             $('#countDown').html(timerStart);
             timerStart--;
             if(timerStart < 0) {
                 $('#countDown').html(0);
+                alert('Jeu terminé');
+                $('#start').fadeIn('fast');
+                score = 0;
+                timerStart = 5;
             }
         };
 
         generateLetters = function () {
             var foundedLetter = "",
-                possibilities = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+                possibilities = "abcd",
                 position,
                 top, left;
 
@@ -59,11 +63,11 @@ require(['underscore', 'jQuery'],
             top = Math.floor(Math.random() * 400);
             left = Math.floor(Math.random() * 800);
 
-            $('#letter').append('<span class="letters letter'+foundedLetter+'" style="top:'+ top + 'px; left:'+ left +'px; background-color:'+ getRandomColor() +'">'+ foundedLetter +'</span>');
+            $('#letter').append('<span class="letters letter'+foundedLetter+'" style="top:'+ top + 'px; left:'+ left +'px; background-color:'+ generateRandomColor() +'">'+ foundedLetter +'</span>');
             setTimeout(generateLetters, 1000);
         };
 
-        function getRandomColor() {
+        function generateRandomColor() {
             var letters = '0123456789ABCDEF'.split('');
             var color = '#';
             for (var i = 0; i < 6; i++ ) {
